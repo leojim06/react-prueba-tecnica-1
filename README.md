@@ -66,6 +66,12 @@ $ git merge --squash feature-branch
 # Crea un único commit con todos los cambios
 # Al no agregar el parámetro -m te permite modificar un mensaje con tódos los mensajes de los commits anteriores
 $ git commit
+
+# En el editor hacer los cambios necesrios al mensaje
+# Para salir Ctrl+X Ctrl+C
+# Luego seguir la instrucción y escribir :qc
+# Finalmente enviar los cambios al repositorio remoto
+$ git push
 ```
 
 ## Agregar testing a la aplicación

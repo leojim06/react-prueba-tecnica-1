@@ -1,10 +1,13 @@
 import './App.css'
+import data from './data.json'
 
 function App() {
   return (
     <>
       <ul>
-        <li>Luke Skywalker</li>
+        {data.results.map((person) => (
+          <li key={person.name}>{person.name}</li>
+        ))}
       </ul>
     </>
   )
