@@ -1,16 +1,23 @@
-import './App.css'
-import data from './data.json'
+import { useState, useEffect } from "react";
+import "./App.css";
+import { getPeople } from "./api/people";
 
 function App() {
+  const [people, setPeople] = useState([]);
+
+  useEffect(() => {
+    getPeople().then((data) => setPeople(data.results));
+  }, []);
+
   return (
     <>
       <ul>
-        {data.results.map((person) => (
+        {people.map((person) => (
           <li key={person.name}>{person.name}</li>
         ))}
       </ul>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
