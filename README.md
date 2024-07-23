@@ -14,3 +14,13 @@ $ npm run dev
 ```
 ![alt text](./assets/consola_2.png)
 ![alt text](./assets/consola_3.png)
+
+## Creando repositorio en GitHub
+``` bash
+$ git init
+$ git add .
+$ git commit -m "cargando proyecto base"
+$ git branch -M main
+$ git remote add origin https://github.com/tu-usuario/tu-proyecto.git
+$ git push -u origin main
+```
