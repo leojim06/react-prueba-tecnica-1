@@ -1,11 +1,20 @@
 import { render, screen } from '@testing-library/react'
 import App from './App'
+import data from './data.json'
 
 describe("Star Wars App", () => {
     test("Debe mostrarse una lista de personajes incluido Luke Skywalker", () => {
         render(<App />);
         var personaje = screen.getByText("Luke Skywalker");
         expect(personaje).toBeInTheDocument();
+    });
+
+    test("Debe mostrar una lista de personajes desde un archivo JSON", () => {
+        render(<App />);
+        for(let person of data.results) {
+            var personaje = screen.getByText(person.name);
+            expect(personaje).toBeInTheDocument();
+        }
     });
 });
 
