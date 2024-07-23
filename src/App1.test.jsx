@@ -9,7 +9,7 @@ function createFetchResponse(data) {
   return { json: () => Promise.resolve(data) }
 }
 
-describe.todo("Star Wars App", () => {
+describe("Star Wars App", () => {
 
   test("Debe obtener info del API", async () => {
 
@@ -24,9 +24,3 @@ describe.todo("Star Wars App", () => {
     }
   });
 });
-
-// https://jestjs.io/docs/expect
-// https://testing-library.com/docs/queries/about/#textmatch
-// https://zaferayan.medium.com/how-to-setup-jest-and-react-testing-library-in-vite-project-2600f2d04bdd
-// https://medium.com/@masbagaspn/unit-testing-react-application-with-vitest-and-react-testing-library-910f6f4dc675
-// https://kentcdodds.com/blog/stop-mocking-fetch

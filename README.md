@@ -107,6 +107,8 @@ export default defineConfig({
 
 5. Crear un archivo test `App.test.js` para validar el funcionamiento y correcta configuración
 ``` js
+import { test, expect } from "vitest";
+
 test('Demo', () => {
     expect(true).toBeTruthy();
 })
