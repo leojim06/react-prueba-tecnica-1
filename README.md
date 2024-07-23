@@ -69,7 +69,7 @@ $ git commit
 
 # En el editor hacer los cambios necesrios al mensaje
 # Para salir Ctrl+X Ctrl+C
-# Luego seguir la instrucción y escribir :qc
+# Luego seguir la instrucción y escribir :qa
 # Finalmente enviar los cambios al repositorio remoto
 $ git push
 ```
@@ -78,49 +78,37 @@ $ git push
 
 1. Agregar dependencias de desarrollo para unit test
 ``` bash
-$ npm install -D jest @testing-library/react @testing-library/jest-dom
-$ npm install -D @babel/preset-env @babel/preset-react
+$ npm install -D vitest @testing-library/react @testing-library/jest-dom @testing-library/user-event
 ```
 
-2. Crear archivo `.babelrc` y contenido
-``` JSON
-{
-  "presets": [
-    "@babel/preset-env",
-    ["@babel/preset-react", { "runtime": "automatic" }]
-  ]
-}
-```
-
-3. Actualizar archivo `.eslintrc.cjs`, agregando en los extends los siguientes valores
-``` JSON
-  extends: [
-    'react-app', 
-    'react-app/jest'
-  ],
-``` 
-
-4. Crear el archivo `setupTests.js` con el siguiente contenido
+2. Crear el archivo `src/setup-tests.js` con el siguiente contenido
 ``` js
 import '@testing-library/jest-dom'
 ```
 
-5. Agregar en el archivo `package.json` la sección para jest y el script para ejecutar los tests
+3. Modificar en el archivo `package.json` la sección script para ejecutar los tests
 ``` JSON
   "scripts": {
-    "test": "jest",
-    "coverage": "npm test --coverage --watchAll --collectCoverageFrom='src/**/*.{js,jsx}'"
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
+  }
+```
+4. En el archivo `vite.config.js` agregar la sección para los tests
+``` js
+export default defineConfig({
+  plugins: [react()],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: ['./src/setup-tests.js'],
   },
-  "jest": {
-    "testEnvironment": "jsdom",
-    "setupFilesAfterEnv": [
-      "<rootDir>/setupTests.js"
-    ]
-  },
+})
 ```
 
-6. Crear un archivo test `App.test.js` para validar el funcionamiento y correcta configuración
+5. Crear un archivo test `App.test.js` para validar el funcionamiento y correcta configuración
 ``` js
+import { test, expect } from "vitest";
+
 test('Demo', () => {
     expect(true).toBeTruthy();
 })
@@ -128,3 +116,10 @@ test('Demo', () => {
 
 Al ejecutar los test con el comando npm run test se podrá ver el siguiente resultado
 ![alt text](./assets/consola_4.png)
+
+Para mayor información con unit test en React se pueden consultar los siguientes links
+* [referencia 1](https://jestjs.io/docs/expect)
+* [referencia 2](https://testing-library.com/docs/queries/about/#textmatch)
+* [referencia 3](https://zaferayan.medium.com/how-to-setup-jest-and-react-testing-library-in-vite-project-2600f2d04bdd)
+* [referencia 4](https://medium.com/@masbagaspn/unit-testing-react-application-with-vitest-and-react-testing-library-910f6f4dc675)
+* [referencia 5](https://kentcdodds.com/blog/stop-mocking-fetch)
