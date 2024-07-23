@@ -54,7 +54,19 @@ $ git checkout -b feature/crear-estado-inicial
 ```
 
 ### Fucionar (Merge) hacia la rama principal
-Para este proyecto vamos a usar el método de 
+Para este proyecto vamos a usar el método de Squash and merge para mantener la rama main lo más límpia posible y fácil de entender de los pasos que se van realizando
+``` bash
+# Cambiarse o ubicarse sobre la rama main
+$ git checkout main
+
+# Hacer el merge con la opción squash de la rama solicitada.
+# Va a tomar todos los commits de la rama y los agrupa en un único commit en la rama destino deseada
+$ git merge --squash feature-branch
+
+# Crea un único commit con todos los cambios
+# Al no agregar el parámetro -m te permite modificar un mensaje con tódos los mensajes de los commits anteriores
+$ git commit
+```
 
 ## Agregar testing a la aplicación
 
