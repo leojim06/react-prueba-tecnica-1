@@ -6,7 +6,7 @@ import data from "./data.json";
 global.fetch = vi.fn()
 
 function createFetchResponse(data) {
-  return { json: () => Promise.resolve(data) }
+  return { ok: true, json: () => Promise.resolve(data) }
 }
 
 describe("Star Wars App", () => {
@@ -16,11 +16,18 @@ describe("Star Wars App", () => {
     fetch.mockResolvedValue(createFetchResponse(data))
 
     render(<App />);
-    expect(window.fetch).toHaveBeenCalledTimes(1);
+    expect(window.fetch).toHaveBeenCalledTimes(2);
     expect(window.fetch).toHaveBeenCalledWith("http://swapi.dev/api/people/");
 
     for (let people of data.results) {
       expect(await screen.findByText(people.name)).toBeInTheDocument();
     }
   });
+
+    test("Debe mostrar un error cuando exista un error de red", async () => {
+      vi.spyOn(window, "fetch").mockRejectedValueOnce(new Error("Network error"));
+
+      render(<App />);
+      expect(await screen.findByText("Network error")).toBeInTheDocument();
+    });
 });

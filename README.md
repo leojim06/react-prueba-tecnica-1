@@ -114,7 +114,7 @@ test('Demo', () => {
 })
 ```
 
-Al ejecutar los test con el comando npm run test se podrá ver el siguiente resultado
+Al ejecutar los test con el comando `npm run test` se podrá ver el siguiente resultado
 ![alt text](./assets/consola_4.png)
 
 Para mayor información con unit test en React se pueden consultar los siguientes links
